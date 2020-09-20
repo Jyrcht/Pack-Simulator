@@ -1,3 +1,5 @@
+#include "main.h"
+
 #include <iostream>
 #include <limits>
 #include <string>
@@ -44,11 +46,11 @@ void fowLoop(){
 }
 
 void loadSets(){
-    std::cout<<"Type the three letter code of all sets desired.\n";
+    std::cout<<"\nType the three letter code for all sets desired, seperated by a space.\n";
     std::string sets;
-    std::cin >> sets;
+    std::getline(std::cin,sets);
     std::cin.clear();
-    std::cin.ignore(std::numeric_limits<std::streamsize>::max(),'\n');
+    loadFow(sets);
 }
 
 void constructPack(){
@@ -60,7 +62,7 @@ void openPack(){
 }
 
 int main(int argc, char **argv){
-    
+
     int choice=0;
     bool bad_input=false;
 

@@ -2,7 +2,7 @@ OBJS = main.cpp cards.cpp pack.cpp
 
 CC = g++
 
-COMPILER_FLAGS = -Wall
+COMPILER_FLAGS = -Wall -g
 
 OBJ_NAME = cards.exe
 

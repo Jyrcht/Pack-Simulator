@@ -1,8 +1,6 @@
 #ifndef CARDS_H
 #define CARDS_H
 
-#include <stdio.h>
-
 #include <string>
 #include <unordered_map>
 

@@ -12,7 +12,8 @@ class Pack{
         std::string set;
         std::unordered_multiset<std::string> cards;
     public:
-        Pack(std::string game, std::string set);
+        Pack(std::string g, std::string s);
+
 
         void makePack(std::string set);
         void openPack();
