@@ -3,13 +3,14 @@
 
 #include <string>
 #include <unordered_map>
+#include <vector>
 
 typedef struct card{
     std::string name;
     std::string set;
     std::string code;
     std::string rarity;
-}card;
+}card_t;
 
 typedef struct fowcard: card{
     std::string type;
@@ -23,8 +24,10 @@ typedef struct fowcard: card{
     int atk;
     int def;
     std::string text;
-}fowcard;
+}fowcard_t;
 
-std::unordered_map<std::string, card> loadFow(std::string sets);
+std::unordered_map<std::string, card_t> loadFow(std::string sets);
+
+card_t makeCard(std::string line);
 
 #endif
