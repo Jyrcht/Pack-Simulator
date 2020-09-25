@@ -10,17 +10,16 @@ class Pack{
     private:
         std::string game;
         std::string set;
-        std::unordered_multiset<std::string> cards;
+        std::vector<card> cards;
     public:
         Pack(std::string g, std::string s);
 
-
-        void makePack(std::string set);
-        void openPack();
+        void build(std::unordered_map<std::string, card>& cards);
+        void open();
 
         std::string getGame(){return game;}
         std::string getSet(){return set;}
-        std::unordered_multiset<std::string> getCards(){return cards;}
+        std::vector<card> getCards(){return cards;}
 };
 
 #endif

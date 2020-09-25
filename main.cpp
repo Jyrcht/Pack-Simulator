@@ -2,11 +2,10 @@
 
 #include <iostream>
 #include <limits>
+#include <locale>
 #include <string>
 #include <vector>
 #include <unordered_set>
-
-#include "pack.h"
 
 void fowLoop(){
 
@@ -34,6 +33,7 @@ void fowLoop(){
             std::cin.ignore(std::numeric_limits<std::streamsize>::max(),'\n');
         }while(bad_input);
 
+
         switch(choice){
             case 1:
                 loadSets(cards);
@@ -41,10 +41,10 @@ void fowLoop(){
                     std::cerr<<"Error: Couldn't load cards!\n\n";
                 break;
             case 2:
-                constructPack();
+                packs.push_back(constructPack(cards));
                 break;
             case 3:
-                openPack();
+                openPack(packs);
                 break;
             case 4:
                 checkCards(cards);
@@ -54,19 +54,28 @@ void fowLoop(){
 }
 
 void loadSets(std::unordered_map<std::string, card_t>& cards){
-    std::cout<<"\nType the three letter code for all sets desired, seperated by a space.\n";
-    std::string sets;
-    std::getline(std::cin,sets);
-    std::cin.clear();
+    std::string sets="SKL";
+    //std::getline(std::cin,sets);
+    //std::cin.clear();
     cards = loadFow(sets);
 }
 
-void constructPack(){
-
+Pack constructPack(std::unordered_map<std::string, card>& cards){
+    std::cout<<"\nType the three letter code for the desired set.\n";
+    std::string set;
+    std::getline(std::cin,set);
+    std::locale loc;
+    for(std::size_t i=0; i<set.length(); i++)
+        set[i]=std::toupper(set[i],loc); 
+    Pack pak("FoW",set);
+    pak.build(cards);
+    return pak;
 }
 
-void openPack(){
-
+void openPack(std::vector<Pack>& packs){
+    for(Pack p : packs){
+        p.open();
+    }
 }
 
 void checkCards(std::unordered_map<std::string, card>& cards){
@@ -87,7 +96,7 @@ void checkCards(std::unordered_map<std::string, card>& cards){
             break;
         }        
 
-        std::cout<<cards[choice].name<<'\n';
+        std::cout<<cards[choice].name<<" "<<cards[choice].rarity <<'\n';
 
     }while(loop);
 }

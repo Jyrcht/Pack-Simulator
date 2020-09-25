@@ -5,11 +5,12 @@
 #include <unordered_map>
 
 #include "cards.h"
+#include "pack.h"
 
 void fowLoop();
 void loadSets(std::unordered_map<std::string, card_t>& cards);
-void constructPack();
-void openPack();
+Pack constructPack(std::unordered_map<std::string, card>& cards);
+void openPack(std::vector<Pack>& packs);
 void checkCards(std::unordered_map<std::string, card>& cards);
 
 #endif

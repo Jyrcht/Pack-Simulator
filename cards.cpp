@@ -26,7 +26,7 @@ std::unordered_map<std::string, card_t> loadFow(std::string sets){
         std::getline(data,line);
         while(std::getline(data,line)){
             card_t card = makeCard(line);
-            std::cout<<card.name<<" "<<card.code<<" "<<card.rarity<<'\n';
+            //std::cout<<card.name<<" "<<card.code<<" "<<card.rarity<<'\n';
             cards.emplace(card.code,card);
         }
         std::cout<<'\n';
@@ -50,6 +50,10 @@ card_t makeCard(std::string line){
             card.set=str;
             break;
             case 3:
+            if(str.length()>7 && card.set.substr(0,3)!="VIN"){
+                std::size_t pos = str.find(',');
+                str=str.substr(0,pos); 
+            }
             card.code=str;
             break;
             case 6:

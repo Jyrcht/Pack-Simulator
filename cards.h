@@ -5,6 +5,9 @@
 #include <unordered_map>
 #include <vector>
 
+/*
+    Card data structures
+*/
 typedef struct card{
     std::string name;
     std::string set;
@@ -26,8 +29,12 @@ typedef struct fowcard: card{
     std::string text;
 }fowcard_t;
 
+/*
+    Functions for dealing with cards
+*/
 std::unordered_map<std::string, card_t> loadFow(std::string sets);
 
 card_t makeCard(std::string line);
+
 
 #endif
