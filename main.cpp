@@ -33,7 +33,8 @@ void fowLoop(){
             std::cin.ignore(std::numeric_limits<std::streamsize>::max(),'\n');
         }while(bad_input);
 
-
+        std::cout<<'\n';
+        
         switch(choice){
             case 1:
                 loadSets(cards);

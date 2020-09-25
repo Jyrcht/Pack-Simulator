@@ -10,7 +10,13 @@ class Pack{
     private:
         std::string game;
         std::string set;
+        std::string cluster;
         std::vector<card> cards;
+
+        void buildGrimm(std::unordered_map<std::string, card>& cards, std::unordered_map<std::string, std::vector<std::string>>& rarites);
+        void buildAlice(std::unordered_map<std::string, card>& cards, std::unordered_map<std::string, std::vector<std::string>>& rarites);
+        void buildLapis(std::unordered_map<std::string, card>& cards, std::unordered_map<std::string, std::vector<std::string>>& rarites);
+
     public:
         Pack(std::string g, std::string s);
 
