@@ -10,14 +10,17 @@
 void fowLoop(){
 
     std::vector<Pack> packs;
-    std::unordered_map<std::string, card> cards;
+    std::unordered_map<std::string, card> cards = loadFow();
+
+    if(cards.empty())
+        std::cerr<<"Error: Couldn't load cards!\n\n";
 
     bool loop=true;
     do{
         int choice=0;
         bool bad_input=false;
         do{
-            std::cout<<"Select option:\n1.Load Sets\n2.Construct pack\n3.Open pack\n4.Check cards\n";
+            std::cout<<"Select option:\n1.Construct pack\n2.Open pack\n3.Check cards\n";
             if(std::cin >> choice){
                 bad_input=false;
             }
@@ -25,7 +28,7 @@ void fowLoop(){
                 bad_input=true;
                 std::cerr<<"Bad input, must be of type int.\n\n";
             }
-            if(choice<1||choice>4){
+            if(choice<1||choice>3){
                 bad_input=true;
                 std::cerr << "Bad Input, not an available option.\n\n";
             }
@@ -34,40 +37,28 @@ void fowLoop(){
         }while(bad_input);
 
         std::cout<<'\n';
-        
+        std::string set;        
+        std::locale loc;
         switch(choice){
             case 1:
-                loadSets(cards);
-                if(cards.empty())
-                    std::cerr<<"Error: Couldn't load cards!\n\n";
+                std::cout<<"\nType the three letter code for the desired set.\n";
+                std::getline(std::cin,set);
+                for(std::size_t i=0; i<set.length(); i++)
+                    set[i]=std::toupper(set[i],loc);   
+                for(int i=0;i<5;i++)           
+                    packs.push_back(constructPack(cards,set));
                 break;
             case 2:
-                packs.push_back(constructPack(cards));
-                break;
-            case 3:
                 openPack(packs);
                 break;
-            case 4:
+            case 3:
                 checkCards(cards);
                 break;
         }
     }while(loop);
 }
 
-void loadSets(std::unordered_map<std::string, card_t>& cards){
-    std::string sets="SKL";
-    //std::getline(std::cin,sets);
-    //std::cin.clear();
-    cards = loadFow(sets);
-}
-
-Pack constructPack(std::unordered_map<std::string, card>& cards){
-    std::cout<<"\nType the three letter code for the desired set.\n";
-    std::string set;
-    std::getline(std::cin,set);
-    std::locale loc;
-    for(std::size_t i=0; i<set.length(); i++)
-        set[i]=std::toupper(set[i],loc); 
+Pack constructPack(std::unordered_map<std::string, card>& cards, std::string set){
     Pack pak("FoW",set);
     pak.build(cards);
     return pak;
@@ -106,6 +97,8 @@ int main(int argc, char **argv){
 
     int choice=0;
     bool bad_input=false;
+
+    srand((unsigned)time(0));
 
     do{
         std::cout<<"Select card game:\n1.Force of Will\n";

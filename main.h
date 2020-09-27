@@ -9,7 +9,7 @@
 
 void fowLoop();
 void loadSets(std::unordered_map<std::string, card_t>& cards);
-Pack constructPack(std::unordered_map<std::string, card>& cards);
+Pack constructPack(std::unordered_map<std::string, card>& cards, std::string set);
 void openPack(std::vector<Pack>& packs);
 void checkCards(std::unordered_map<std::string, card>& cards);
 

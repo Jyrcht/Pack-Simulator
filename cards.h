@@ -12,11 +12,12 @@ typedef struct card{
     std::string name;
     std::string set;
     std::string code;
+    std::string type;
     std::string rarity;
 }card_t;
 
+/*
 typedef struct fowcard: card{
-    std::string type;
     std::string attribute;
     std::string cost;
     int total_cost;
@@ -28,12 +29,12 @@ typedef struct fowcard: card{
     int def;
     std::string text;
 }fowcard_t;
+*/
 
 /*
     Functions for dealing with cards
 */
-std::unordered_map<std::string, card_t> loadFow(std::string sets);
-
+std::unordered_map<std::string, card_t> loadFow();
 card_t makeCard(std::string line);
 
 

@@ -7,14 +7,9 @@
 #include <string>
 #include <unordered_map>
 
-std::unordered_map<std::string, card_t> loadFow(std::string sets){
+std::unordered_map<std::string, card_t> loadFow(){
     std::unordered_map<std::string, card_t> cards;
     std::ifstream data;
-    std::string set;
-
-    std::locale loc;
-    for(std::string::size_type i=0; i<sets.length(); i++)
-        sets[i]=std::toupper(sets[i],loc);
 
     data.open("./FoW/carddata.txt",std::ios::in);
     if(!data.is_open()){
@@ -44,21 +39,24 @@ card_t makeCard(std::string line){
         std::string str = line.substr(i,pos-i);
         switch(cnt){
             case 1:
-            card.name=str;
-            break;
+                card.name=str;
+                break;
             case 2:
-            card.set=str;
-            break;
+                card.set=str;
+                break;
             case 3:
-            if(str.length()>7 && card.set.substr(0,3)!="VIN"){
-                std::size_t pos = str.find(',');
-                str=str.substr(0,pos); 
-            }
-            card.code=str;
-            break;
+                if(str.length()>7 && card.set.substr(0,3)!="VIN"){
+                    std::size_t pos = str.find(',');
+                    str=str.substr(0,pos); 
+                }
+                card.code=str;
+                break;
+            case 4:
+                card.type=str;
+                break;
             case 6:
-            card.rarity=str;
-            break;
+                card.rarity=str;
+                break;
         }
         i=pos;
         cnt++;
